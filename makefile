@@ -1,3 +1,5 @@
+run:
+	sudo python3 blutooth.py
 install: gattlib
 	sudo pip3 install -r requirements.txt
 clean:
