@@ -1,0 +1,15 @@
+# Install dependencies with
+#
+#     pip install -r requirements.txt
+#
+# Additionally
+#
+#     yum install -y glib2-devel.x86_64 python3-devel.x86_64  boost-python36-devel.x86_64
+#
+# Add `--compat` to `/usr/lib/systemd/system/bluetooth.service` (or just dont use `--experimental`, not sure)
+
+# Due to evil `/bin/ld: cannot find -lboost_python-py34` issues, see makefile
+tmp/gattlib-0.20200929/
+
+# https://github.com/pybluez/pybluez
+pybluez[ble]
