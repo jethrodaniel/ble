@@ -36,3 +36,11 @@ Subject is `HA-802` - https://hearingassist.com/products/recharge-bte-bluetooth-
 - https://devzone.nordicsemi.com/nordic/short-range-guides/b/bluetooth-low-energy/posts/ble-characteristics-a-beginners-tutorial
 - https://learn.adafruit.com/reverse-engineering-a-bluetooth-low-energy-light-bulb/overview
 - https://learn.adafruit.com/introduction-to-bluetooth-low-energy/introduction
+- https://reelyactive.github.io/ble-identifier-reference.html
+- https://stackoverflow.com/a/33123390/7132678
+
+- [part 1](https://www.youtube.com/watch?v=D3xtOc-vj1I)
+- [part 2](https://www.youtube.com/watch?v=LeUDIgZj2t4&t=29s)
+- [part 3](https://www.youtube.com/watch?v=dAmZudlm60E)
+- [part 4](https://www.youtube.com/watch?v=C-veGabV3A0)
+- [part 5](https://www.youtube.com/watch?v=dAmZudlm60E)
