@@ -14,8 +14,19 @@
 
 import time
 import sys
+import json
 
 import bluetooth.ble as ble
+
+class UuidDatabase:
+  def __init__(self):
+    with open('third_party/bluetooth-numbers-database/v1/characteristic_uuids.json') as f:
+      self.data = json.load(f)
+  def uuid(self, uuid_value):
+    return filter(lambda row: row['uuid'] == uuid_value, self.data)[0]
+
+db = UuidDatabase()
+# print(db.data)
 
 print("Scanning for BLE devices... (indefinately)")
 
@@ -37,7 +48,6 @@ print("\n=== Devices ===")
 for address, name in devices.items():
   print(f"name: {name}, address: {address}")
 
-# import pdb; pdb.set_trace()
 
 db = {
   'name': '00002a24-0000-1000-8000-00805f9b34fb',
@@ -65,6 +75,9 @@ for address, name in addresses.items():
   print(f"\nServices:")
   for serv in req.discover_primary():
     print(f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
+    import pdb; pdb.set_trace()
+    name = db.uuid(serv['uuid'])
+    print(f"name: {name}, uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
 
   # Characteristic values: https://www.bluetooth.com/specifications/assigned-numbers/
   #
