@@ -2,6 +2,16 @@
 # - https://github.com/pybluez/pybluez/tree/0.23/examples/ble
 # - https://pypi.org/project/gattlib/
 
+
+# GATT Hearing Aid Profile
+#
+# Services:
+#   -
+#
+# All BLE characteristic UUIDs are of the form:
+#    0000XXXX-0000-1000-8000-00805f9b34fb
+# So `2a00` is `00002a00-0000-1000-8000-00805f9b34fb`
+
 import time
 import sys
 
@@ -44,12 +54,21 @@ for address, name in addresses.items():
   print(f"\n==> [device]: {address} ({name}) ===")
   print(f"\nInfo we actually understand:")
   for name, uuid in db.items():
+    # import pdb; pdb.set_trace()
     print(f"{name}: {req.read_by_uuid(uuid)}")
+    print(f"service type: {req.read_by_handle(0x001)}") # Generic Attribute
+    print(f"service type: {req.read_by_handle(0x005)}") # Generic Access
 
+  # Service values: https://www.bluetooth.com/specifications/assigned-numbers/
+  #
+  # | GATT Service | 0x1800 | Generic Access
   print(f"\nServices:")
   for serv in req.discover_primary():
     print(f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
 
+  # Characteristic values: https://www.bluetooth.com/specifications/assigned-numbers/
+  #
+  # | GATT Characteristic and Object Type | 0x2A00 | Device Name
   print(f"\nCharacteristics:")
   for char in req.discover_characteristics():
     val = req.read_by_uuid(char['uuid'])
