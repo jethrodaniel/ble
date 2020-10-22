@@ -38,21 +38,31 @@ print("\n=== Devices ===")
 for address, name in devices.items():
   print(f"name: {name}, address: {address}")
 
-import pdb; pdb.set_trace()
-for address, name in devices.items()[0]:
-  print(f"\n==> {address} ({name})")
-  req = GATTRequester(address)
+# import pdb; pdb.set_trace()
+address = list(devices)[0]
+print(f"\n==> {address} ({name})")
+req = GATTRequester(address)
 
-  print(f"Services:")
-  # for serv in req.discover_primary():
-  #   print(f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
+print(f"Services:")
+for serv in req.discover_primary():
+  print(f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
 
-  print(f"Characteristics:")
-  for char in req.discover_characteristics():
-    val = true # req.read_by_uuid(char['uuid'])
-    # time.sleep(5)
-    print(f"uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}, value: {val}")
-    # print(f"uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}")
 
-  # req.write_by_handle(0x10, bytes([14, 4, 56]))
+
+# for address, name in devices.items()[0]:
+#   print(f"\n==> {address} ({name})")
+#   req = GATTRequester(address)
+
+#   print(f"Services:")
+#   for serv in req.discover_primary():
+#     print(f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
+
+#   print(f"Characteristics:")
+#   for char in req.discover_characteristics():
+#     val = true # req.read_by_uuid(char['uuid'])
+#     # time.sleep(5)
+#     print(f"uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}, value: {val}")
+#     # print(f"uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}")
+
+#   # req.write_by_handle(0x10, bytes([14, 4, 56]))
 
