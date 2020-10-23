@@ -21,12 +21,12 @@ jobs:
       run: |
         sudo apt-get install -y python3-setuptools libbluetooth-dev libboost-all-dev libboost-python-dev
         python -m pip install --upgrade pip
-        make install
+        make install PY=python
 
     - name: lint
       run: |
-        make lint
+        make lint PY=python
 
     - name: test
       run: |
-        make test
+        make test PY=python
