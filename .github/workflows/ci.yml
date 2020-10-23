@@ -20,6 +20,7 @@ jobs:
     - name: install
       run: |
         sudo apt-get install -y libboost-python-dev
+        sudo apt-get install -y python3-setuptools
         python -m pip install --upgrade pip
         make install
 
