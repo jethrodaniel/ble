@@ -19,6 +19,7 @@ import bluetooth.ble as ble
 
 from blutooth.uuid_database import UuidDatabase
 
+# import pdb; pdb.set_trace()
 
 print("Scanning for BLE devices... (indefinately)")
 

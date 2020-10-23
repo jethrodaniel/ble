@@ -1,18 +1,3 @@
-# Install dependencies with
-#
-#     pip install -r requirements.txt
-#
-# Additionally
-#
-#     yum install -y glib2-devel.x86_64 python3-devel.x86_64  boost-python36-devel.x86_64
-#
-# Add `--compat` to `/usr/lib/systemd/system/bluetooth.service` (or just dont use `--experimental`, not sure)
-#
-# - https://stackoverflow.com/questions/33110992/python-code-for-bluetooth-throws-error-after-i-had-to-reset-the-adapter
-# - https://pybluez.readthedocs.io/en/latest/install.html
-# - https://stackoverflow.com/questions/41463847/got-error-while-download-gattlib-via-pip3
-# - https://stackoverflow.com/questions/16710047/usr-bin-ld-cannot-find-lnameofthelibrary
-
 # Due to evil `/bin/ld: cannot find -lboost_python-py34` issues, see makefile
 tmp/gattlib-0.20200929/
 
