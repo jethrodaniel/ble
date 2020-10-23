@@ -19,8 +19,7 @@ jobs:
 
     - name: install
       run: |
-        sudo apt-get install -y libboost-python-dev
-        sudo apt-get install -y python3-setuptools
+        sudo apt-get install -y libboost-python-dev python3-setuptools libbluetooth-dev
         python -m pip install --upgrade pip
         make install
 
