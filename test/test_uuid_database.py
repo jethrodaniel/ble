@@ -6,7 +6,7 @@ class TestUuidDatabase(unittest.TestCase):
   def setUp(self):
     self.db = UuidDatabase()
 
-  def test_uuid(self):
+  def test_uuid_characteristic(self):
     expected = {
       "name": "Device Name",
       "identifier": "org.bluetooth.characteristic.gap.device_name",
@@ -14,6 +14,16 @@ class TestUuidDatabase(unittest.TestCase):
       "source": "gss"
     }
     uuid = '00002a00-0000-1000-8000-00805f9b34fb'
+    self.assertEqual(expected, self.db.uuid(uuid))
+
+  def test_uuid_service(self):
+    expected = {
+      "name": "Generic Access",
+      "identifier": "org.bluetooth.service.generic_access",
+      "uuid": "1800",
+      "source": "gss"
+    }
+    uuid = '00001800-0000-1000-8000-00805f9b34fb'
     self.assertEqual(expected, self.db.uuid(uuid))
 
   def test_uuid_invalid_input(self):
