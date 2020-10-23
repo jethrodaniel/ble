@@ -7,9 +7,9 @@ class UuidDatabase:
 
   def sanitize_uuid(self, uuid_value):
     """Convert `00001800-0000-1000-8000-00805f9b34fb` to `1800`"""
-    return uuid_value[4:8]
+    return str.upper(uuid_value[4:8])
 
   def uuid(self, uuid_value):
-    res = list(filter(lambda row: row['uuid'] == str.upper(uuid_value[4:8]), self.data))
+    res = list(filter(lambda row: row['uuid'] == self.sanitize_uuid(uuid_value), self.data))
     if len(res) > 0: return res[0]
-    else:            return ''
+    return ''
