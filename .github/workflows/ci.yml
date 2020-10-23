@@ -25,6 +25,7 @@ jobs:
 
     - name: lint
       run: |
+        pip install -r requirements.txt
         make lint PY=python
 
     - name: test
