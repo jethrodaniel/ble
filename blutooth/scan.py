@@ -18,21 +18,21 @@ import json
 
 import bluetooth.ble as ble
 
+# import pdb; pdb.set_trace()
+
 class UuidDatabase:
   def __init__(self):
     with open('third_party/bluetooth-numbers-database/v1/characteristic_uuids.json') as f:
       self.data = json.load(f)
+
   def sanitize_uuid(self, uuid_value):
     """Convert `00001800-0000-1000-8000-00805f9b34fb` to `1800`"""
     return uuid_value[4:8]
+
   def uuid(self, uuid_value):
-    # res = list(filter(lambda row: row['uuid'] == self.sanitize_uuid(uuid_value), self.data))
-    res = list(filter(lambda row: row['uuid'] == uuid_value[4:8], self.data))
-    import pdb; pdb.set_trace()
-    if len(res) > 0:
-      return res[0]
-    else:
-      return ''
+    res = list(filter(lambda row: row['uuid'] == str.upper(uuid_value[4:8]), self.data))
+    if len(res) > 0: return res[0]
+    else:            return ''
 
 print("Scanning for BLE devices... (indefinately)")
 
@@ -90,7 +90,6 @@ for address, name in addresses.items():
   print(f"\nCharacteristics:")
   for char in req.discover_characteristics():
     name = UuidDatabase().uuid(serv['uuid'])
-    name = 'tmp'
-    print(f"name: {name}, uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}, value: {val}")
+    print(f"name: {name}, uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}")
   req.disconnect()
 
