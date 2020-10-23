@@ -7,7 +7,7 @@ install: gattlib
 clean:
 	rm -rf tmp
 .PHONY: test
-test:
+test: lint
 	$(PY) -m unittest
 lint:
 	$(PY) -m yapf blutooth/*.py test/*.py --recursive --in-place --verbose
