@@ -29,7 +29,7 @@ class TestUuidDatabase(unittest.TestCase):
 
     def test_uuid_invalid_input(self):
         uuid = 'Be Excellent to each other!'
-        self.assertEqual('', self.db.uuid(uuid))
+        self.assertEqual({'name': 'Unknown'}, self.db.uuid(uuid))
         # with self.assertRaises(TypeError):
         #   self.db.uuid(uuid)
 
