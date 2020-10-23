@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
 
     - name: set up python v${{matrix.python-version}}
       uses: actions/setup-python@v2
