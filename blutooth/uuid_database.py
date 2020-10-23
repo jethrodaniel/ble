@@ -1,8 +1,12 @@
 import json
 
 class UuidDatabase:
+  SUBMODULE = 'third_party/bluetooth-numbers-database'
   def __init__(self):
-    with open('third_party/bluetooth-numbers-database/v1/characteristic_uuids.json') as f:
+    json_path = lambda name: f"{self.SUBMODULE}/v1/{name}.json"
+    json_file = lambda name:
+
+    with open(json_path('characteristic_uuids')) as f:
       self.data = json.load(f)
 
   def sanitize_uuid(self, uuid_value):
