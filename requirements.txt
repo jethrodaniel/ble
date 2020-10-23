@@ -3,3 +3,5 @@ tmp/gattlib-0.20200929/
 
 # https://github.com/pybluez/pybluez
 pybluez[ble]
+
+yapf

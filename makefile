@@ -10,6 +10,8 @@ clean:
 .PHONY: test
 test:
 	$(PY) -m unittest
+lint:
+	$(PY) -m yapf blutooth/*.py test/*.py --recursive --in-place --verbose
 gattlib: clean
 	pip3 download gattlib
 	mkdir -p tmp
