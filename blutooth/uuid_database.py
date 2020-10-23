@@ -25,4 +25,4 @@ class UuidDatabase:
             filter(lambda row: row['uuid'] == self.sanitize_uuid(uuid_value),
                    self.data))
         if len(res) > 0: return res[0]
-        return ''
+        return {'name': 'Unknown'}

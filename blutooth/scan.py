@@ -44,41 +44,21 @@ for address, name in devices.items():
 # causing some mayham, leading to segmentation faults
 addresses = devices.copy()
 
-db = {
-    'name': '00002a24-0000-1000-8000-00805f9b34fb',
-    'bluetooth chip': '00002a29-0000-1000-8000-00805f9b34fb'
-}
-
 for address, name in addresses.items():
     req = ble.GATTRequester(address)
 
     print(f"\n==> [device]: {address} ({name}) ===")
-    print(f"\nInfo we actually understand:")
-    for name, uuid in db.items():
-        print(f"{name}: {req.read_by_uuid(uuid)}")
-        print(
-            f"service type: {req.read_by_handle(0x001)}")  # Generic Attribute
-        print(f"service type: {req.read_by_handle(0x005)}")  # Generic Access
+    req.read_by_uuid('2a24') # We get a segmentation fault if we don't do this ?
 
-    # Service values: https://www.bluetooth.com/specifications/assigned-numbers/
-    #
-    # | GATT Service | 0x1800 | Generic Access
     print(f"\nServices:")
     for serv in req.discover_primary():
-        print(
-            f"uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}"
-        )
-        # import pdb; pdb.set_trace()
-        # name = UuidDatabase().uuid(serv['uuid'])
-        # print(f"name: {name}, uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
+        name = UuidDatabase().uuid(serv['uuid'])['name']
+        print(f"name: {name}, uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}")
 
-    # Characteristic values: https://www.bluetooth.com/specifications/assigned-numbers/
-    #
-    # | GATT Characteristic and Object Type | 0x2A00 | Device Name
     print(f"\nCharacteristics:")
     for char in req.discover_characteristics():
-        name = UuidDatabase().uuid(serv['uuid'])
+        name = UuidDatabase().uuid(char['uuid'])['name']
         print(
             f"name: {name}, uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}"
         )
-    req.disconnect()
+    # req.disconnect()
