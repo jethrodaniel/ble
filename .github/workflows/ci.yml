@@ -11,6 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: set up python v${{matrix.python-version}}
       uses: actions/setup-python@v2
       with:
@@ -18,6 +19,7 @@ jobs:
 
     - name: install
       run: |
+        sudo apt-get install -y libboost-python-dev
         python -m pip install --upgrade pip
         make install
 
