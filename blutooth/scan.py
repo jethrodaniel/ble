@@ -58,8 +58,9 @@ for address, name in addresses.items():
     req = ble.GATTRequester(address)
 
     print(f"\n==> [device]: {address} ({name}) ===")
-    req.read_by_uuid(
-        '2a24')  # We get a segmentation fault if we don't do this ?
+
+    # We get a segmentation fault if we don't do this ?
+    req.read_by_uuid('2a24')
 
     print(f"\nServices:")
     for serv in req.discover_primary():
@@ -74,14 +75,8 @@ for address, name in addresses.items():
         db = UuidDatabase()
         name = db.uuid(char['uuid'])['name']
         name = str.ljust(name, 42)
-        # desc = req.read_by_handle(char['handle'])[0]
         value = req.read_by_handle(char['value_handle'])[0]
         uuid = char['uuid'][4:8]
-        # start = char['start']
-        # end = char['end']
         print(
-            # f"({uuid}) {name}: {value}, handle: {desc}, properties: {char['properties']}, start: {start}, end: {end}"
-            # f"({uuid}) {name}: {value}, handle: {desc}, properties: {char['properties']}"
             f"({uuid}) {name}: {value}, handle: {char['handle']}, properties: {char['properties']}"
         )
-    # req.disconnect()# import pdb; pdb.set_trace()
