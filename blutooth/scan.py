@@ -74,7 +74,14 @@ for address, name in devices.items():
         name = db.uuid(char['uuid'])['name']
         name = str.ljust(name, 42)
         value = req.read_by_handle(char['value_handle'])[0]
+        properties = {
+            2: 'READ',
+            34: 'INDICATE, READ',
+            18: 'NOTIFY, READ',
+            10: 'READ, WRITE'
+        }
+        properties = properties[char['properties']]
         uuid = char['uuid'][4:8]
         print(
-            f"({uuid}) {name}: {value}, handle: {char['handle']}, properties: {char['properties']}"
+            f"({uuid}) {name}: {value}, handle: {char['handle']}, properties: {properties}"
         )
