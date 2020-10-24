@@ -1,6 +1,6 @@
 PY ?= ~/.asdf/installs/python/3.6.9/bin/python
 PIP = $(PY) -m pip
-run:
+run: test
 	sudo $(PY) -m blutooth.scan
 install: gattlib
 	sudo $(PIP) install -r requirements.txt
