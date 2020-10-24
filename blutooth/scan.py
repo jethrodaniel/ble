@@ -51,11 +51,7 @@ for address, name in devices.items():
     if name != 'SET-A15': continue  # TODO: rm
     print(f"name: {name}, address: {address}")
 
-# required! `devices` likely points to the same GattLib C-object, which is
-# causing some mayham, leading to segmentation faults
-addresses = devices.copy()
-
-for address, name in addresses.items():
+for address, name in devices.items():
     if name != 'SET-A15': continue  # TODO: rm
     req = ble.GATTRequester(address)
 
