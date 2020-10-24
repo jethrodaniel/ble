@@ -3,8 +3,8 @@ import json
 
 class UuidDatabase:
     '''
-  Converts long-form UUIDs to human-readable info
-  '''
+    Converts long-form UUIDs to human-readable info
+    '''
 
     SUBMODULE = 'third_party/bluetooth-numbers-database'
 
@@ -15,9 +15,22 @@ class UuidDatabase:
             self.data = json.load(f)
         with open(json_path('service_uuids')) as f:
             self.data += json.load(f)
+        with open(json_path('descriptor_uuids')) as f:
+            self.data += json.load(f)
 
     def sanitize_uuid(self, uuid_value):
-        """Convert `00001800-0000-1000-8000-00805f9b34fb` to `1800`"""
+        """Convert 128 bit BLE UUIDs into 16/32/128 bit values.
+
+        TODO: for now, we only convert to 16 bit
+
+        The base UUID for 16 bit identififers is
+
+            0000xxxx-0000-1000-8000-00805f9b34fb
+
+        For 32 bit identififers
+
+            xxxxxxxx-0000-1000-8000-00805f9b34fb
+        """
         return str.upper(uuid_value[4:8])
 
     def uuid(self, uuid_value):

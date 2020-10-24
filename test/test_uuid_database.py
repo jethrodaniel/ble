@@ -27,6 +27,17 @@ class TestUuidDatabase(unittest.TestCase):
         uuid = '00001800-0000-1000-8000-00805f9b34fb'
         self.assertEqual(expected, self.db.uuid(uuid))
 
+    def test_uuid_descriptor(self):
+        expected = {
+            "name": "Client Characteristic Configuration",
+            "identifier":
+            "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+            "uuid": "2902",
+            "source": "gss"
+        }
+        uuid = '00002902-0000-1000-8000-00805f9b34fb'
+        self.assertEqual(expected, self.db.uuid(uuid))
+
     def test_uuid_invalid_input(self):
         uuid = 'Be Excellent to each other!'
         self.assertEqual({'name': 'Unknown'}, self.db.uuid(uuid))
