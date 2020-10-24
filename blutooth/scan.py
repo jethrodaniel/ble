@@ -27,6 +27,7 @@ import sys
 import bluetooth.ble as ble
 
 from blutooth.uuid_database import UuidDatabase
+from blutooth.gatt import Device, Service, Characteristic
 
 # import pdb; pdb.set_trace()
 
@@ -66,6 +67,7 @@ for address, name in devices.items():
         name = db.uuid(serv['uuid'])['name']
         value = db.uuid(serv['uuid'])['name']
         uuid = serv['uuid'][4:8]
+        s = Service(uuid, name)
         print(f"({uuid}) {name}, start: {serv['start']}, end: {serv['end']}")
 
     print(f"\nCharacteristics:")
