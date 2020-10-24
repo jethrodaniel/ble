@@ -1,6 +1,6 @@
 import unittest
 
-from blutooth.uuid_database import UuidDatabase
+from blutooth.uuid_database import UuidDatabase, InvalidUuid
 
 
 class TestUuidDatabase(unittest.TestCase):
@@ -41,8 +41,11 @@ class TestUuidDatabase(unittest.TestCase):
     def test_uuid_invalid_input(self):
         uuid = 'Be Excellent to each other!'
         self.assertEqual({'name': 'Unknown'}, self.db.uuid(uuid))
-        # with self.assertRaises(TypeError):
-        #   self.db.uuid(uuid)
+
+    def test_uuid_sanitize_invalid_input(self):
+        uuid = 'Party on, dudes!'
+        with self.assertRaises(InvalidUuid):
+            self.db.sanitize_uuid(uuid)
 
     def test_sanitize_uuid(self):
         before = '00002a00-0000-1000-8000-00805f9b34fb'

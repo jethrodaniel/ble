@@ -1,6 +1,10 @@
 import json
 
 
+class InvalidUuid(ValueError):
+    pass
+
+
 class UuidDatabase:
     '''
     Converts long-form UUIDs to human-readable info
@@ -31,11 +35,21 @@ class UuidDatabase:
 
             xxxxxxxx-0000-1000-8000-00805f9b34fb
         """
-        return str.upper(uuid_value[4:8])
+        u = uuid_value[4:8]
+        if not uuid_value == f"0000{u}-0000-1000-8000-00805f9b34fb":
+            raise InvalidUuid("UUID is invalid for 16 bit conversion")
+        return str.upper(u)
+
+    def __search_for_uuid(self, long_uuid):
+        for uuid in self.data:
+            try:
+                if uuid['uuid'] == self.sanitize_uuid(long_uuid):
+                    return uuid
+            except InvalidUuid:
+                pass
+        return None
 
     def uuid(self, uuid_value):
-        res = list(
-            filter(lambda row: row['uuid'] == self.sanitize_uuid(uuid_value),
-                   self.data))
-        if len(res) > 0: return res[0]
+        res = self.__search_for_uuid(uuid_value)
+        if res is not None: return res
         return {'name': 'Unknown'}
