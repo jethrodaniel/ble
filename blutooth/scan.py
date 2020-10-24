@@ -48,6 +48,7 @@ while len(devices) == 0:
 
 print("\n=== Devices ===")
 for address, name in devices.items():
+    if name != 'SET-A15': continue  # TODO: rm
     print(f"name: {name}, address: {address}")
 
 # required! `devices` likely points to the same GattLib C-object, which is
@@ -55,6 +56,7 @@ for address, name in devices.items():
 addresses = devices.copy()
 
 for address, name in addresses.items():
+    if name != 'SET-A15': continue  # TODO: rm
     req = ble.GATTRequester(address)
 
     print(f"\n==> [device]: {address} ({name}) ===")
