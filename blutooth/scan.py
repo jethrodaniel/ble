@@ -11,6 +11,16 @@
 #    0000XXXX-0000-1000-8000-00805f9b34fb
 # So `2a00` is `00002a00-0000-1000-8000-00805f9b34fb`
 
+# RuntimeError: Device is not responding!
+# RuntimeError: Channel or attrib disconnected
+
+# Bluetooth 128-bit UUIDs
+#
+#
+#     0000xxxx-0000-1000-8000-00805F9B34FB  # 16 bit
+#     xxxxxxxx-0000-1000-8000-00805F9B34FB  # 32 bit
+#     xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx  # 128 bit custom UUIDs
+
 import time
 import sys
 
@@ -53,15 +63,25 @@ for address, name in addresses.items():
 
     print(f"\nServices:")
     for serv in req.discover_primary():
-        name = UuidDatabase().uuid(serv['uuid'])['name']
-        print(
-            f"name: {name}, uuid: {serv['uuid']}, start: {serv['start']}, end: {serv['end']}"
-        )
+        db = UuidDatabase()
+        name = db.uuid(serv['uuid'])['name']
+        value = db.uuid(serv['uuid'])['name']
+        uuid = serv['uuid'][4:8]
+        print(f"({uuid}) {name}, start: {serv['start']}, end: {serv['end']}")
 
     print(f"\nCharacteristics:")
     for char in req.discover_characteristics():
-        name = UuidDatabase().uuid(char['uuid'])['name']
+        db = UuidDatabase()
+        name = db.uuid(char['uuid'])['name']
+        name = str.ljust(name, 42)
+        # desc = req.read_by_handle(char['handle'])[0]
+        value = req.read_by_handle(char['value_handle'])[0]
+        uuid = char['uuid'][4:8]
+        # start = char['start']
+        # end = char['end']
         print(
-            f"name: {name}, uuid: {char['uuid']}, handle: {char['handle']}, value_handle: {char['value_handle']}, properties: {char['properties']}"
+            # f"({uuid}) {name}: {value}, handle: {desc}, properties: {char['properties']}, start: {start}, end: {end}"
+            # f"({uuid}) {name}: {value}, handle: {desc}, properties: {char['properties']}"
+            f"({uuid}) {name}: {value}, handle: {char['handle']}, properties: {char['properties']}"
         )
-    # req.disconnect()
+    # req.disconnect()# import pdb; pdb.set_trace()
