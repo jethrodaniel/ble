@@ -29,8 +29,6 @@ import bluetooth.ble as ble
 from blutooth.uuid_database import UuidDatabase
 from blutooth.gatt import Device, Service, Characteristic
 
-# import pdb; pdb.set_trace()
-
 print("Scanning for BLE devices... (indefinately)")
 
 service = ble.DiscoveryService()  # DiscoveryService("hci0")
@@ -43,14 +41,17 @@ while len(devices) == 0:
         devices = service.discover(timeout)
     except RuntimeError as e:
         sys.exit(f"ERROR: {e}")
+    if len(devices) > 0:
+        pass
+        # import pdb; pdb.set_trace()
+        # devices = {k:v for (k,v) in devices.items() if v == 'SET-A15'}
 
     time_taken += timeout
     print(f"...found {len(devices)} device(s) ({time_taken} seconds)")
 
 print("\n=== Devices ===")
 for address, name in devices.items():
-    if name != 'SET-A15': continue  # TODO: rm
-    print(f"name: {name}, address: {address}")
+    print(f"\n[device]: {address} ({name})")
 
 for address, name in devices.items():
     if name != 'SET-A15': continue  # TODO: rm
@@ -87,3 +88,24 @@ for address, name in devices.items():
         print(
             f"({uuid}) {name}: {value}, handle: {char['handle']}, properties: {properties}"
         )
+
+
+def set_volume(req, level):
+    val = int(level)
+    req.write_by_handle(0x0025, val.to_bytes(1, 'big'))
+
+
+print("== Volume Level mapping ==")
+print("\t1 = 10%")
+print("\t9 = 20%")
+print("\t17 = 30%")
+print("\t25 = 40%")
+print("\t33 = 50%")
+print("\t41 = 60%")
+print("\t57 = 70%")
+
+while True:
+    res = input("Enter volume input: ")
+    if res == "q":
+        sys.exit(0)
+    print(f"=> {set_volume(req, res)}")
