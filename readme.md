@@ -18,7 +18,7 @@ see https://asdf-vm.com/#/
 ## what it do
 
 End goal is to produce a mobile app to control hearing aids. It seems like most
-of these work in a devise-specific way, and that's a shame.
+of these work in a device-specific way, and that's a shame.
 
 supported devices
 
