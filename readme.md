@@ -1,8 +1,8 @@
-# bluetooth
+# ble
 
 ![](https://github.com/jethrodaniel/bluetooth/workflows/ci/badge.svg)
 
-experiments in BLE.
+experiments in Bluetooth Low Energy.
 
 ## prereqs
 
@@ -15,14 +15,6 @@ asdf install python latest
 
 see https://asdf-vm.com/#/
 
-## what it do
-
-End goal is to produce a mobile app to control hearing aids. It seems like most
-of these work in a device-specific way, and that's a shame.
-
-supported devices
-
-- [ha-802](docs/ha-802.md)
 
 ## references
 
