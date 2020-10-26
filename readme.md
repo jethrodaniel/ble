@@ -1,6 +1,6 @@
 # ble
 
-![](https://github.com/jethrodaniel/bluetooth/workflows/ci/badge.svg)
+![](https://github.com/jethrodaniel/ble/workflows/ci/badge.svg)
 
 experiments in Bluetooth Low Energy.
 
